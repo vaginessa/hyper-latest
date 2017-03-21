@@ -8,6 +8,7 @@
     "lint": "standard",
     "test": "ava && standard",
     "dev": "nodemon .",
+    "install": "cd node_modules/marky-markdown/ && npm install",
     "deploy": "now --public && now alias"
   },
   "now": {
