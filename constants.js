@@ -1,8 +1,5 @@
-const REPO_PATH = 'zeit/hyper'
-const APP_NAME = 'hyper'
-
-module.exports.REPO_PATH = REPO_PATH
-module.exports.APP_NAME = APP_NAME
+module.exports.REPO_PATH = 'zeit/hyper'
+module.exports.APP_NAME = 'hyper'
 
 module.exports.downloads = [
   {

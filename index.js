@@ -1,35 +1,14 @@
 const micro = require('micro')
-const { send } = micro
-const fetch = require('isomorphic-fetch')
 const semver = require('semver')
-const ms = require('ms')
 const debug = require('debug')('github-releases')
 
-const { getLatest, forwardUrl, setHtml, render, styleSheet } = require('./lib')
-const viewController = require('./lib/view')
 const { REPO_PATH, downloads } = require('./constants')
+const { getLatest, forwardUrl, setHtml, render } = require('./lib')
+const styleSheet = require('./lib/styles')
+const viewController = require('./lib/view-controller')
 
-let cache = null
-
-const fetchReleases = () => fetch(`https://api.github.com/repos/${REPO_PATH}/releases`)
-  .then(response => response.json())
-  .catch(error => { console.error('error fetching releases:', error) })
-
-async function cacheReleases () {
-  const releases = await fetchReleases()
-
-  // Don't update cache if we don't get data from github
-  if (Array.isArray(releases)) {
-    cache = releases
-    return releases
-  }
-
-  return Array.isArray(cache) ? cache : []
-}
-
-setInterval(cacheReleases, ms('15m'))
-
-const getReleases = () => Array.isArray(cache) ? Promise.resolve(cache) : cacheReleases()
+const ReleaseCache = require('./lib/release-cache')
+const cache = new ReleaseCache({ repoPath: REPO_PATH })
 
 const fallbackRedirect = (res) => forwardUrl(res, `https://github.com/${REPO_PATH}/releases`)
 
@@ -48,7 +27,7 @@ const versionRegex = /\d\.\d\.\d/
 const isVersion = path => path !== '' && (path === 'latest' || (path.match(versionRegex) && semver.valid(path)))
 
 async function router (req, res) {
-  const releases = await getReleases()
+  const releases = await cache.getReleases()
   const paths = req.url.split('/')
 
   const platform = paths.find(isPlatform)
@@ -61,14 +40,14 @@ async function router (req, res) {
     const release = isLatestVersion ? getLatest(releases) : releases.find(release => release.tag_name === version)
 
     if (!release) {
-      send(res, 404, `No release found matching version: ${JSON.stringify(version)}`)
+      micro.send(res, 404, `No release found matching version: ${JSON.stringify(version)}`)
       return
     }
 
     if (platform) return downloadRedirect(req, res, { release, platform })
   }
 
-  return viewController(req, res, { releases, version, platform })
+  return viewController(req, res, { releases, version, platform, cache })
 }
 
 const handler = async (req, res) => {
@@ -76,6 +55,7 @@ const handler = async (req, res) => {
 
   if (typeof result === 'string') {
     setHtml(res)
+
     return [
       render('title', null, REPO_PATH),
       `<style>${styleSheet}</style>`,
