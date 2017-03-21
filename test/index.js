@@ -1,10 +1,21 @@
 import test from 'ava'
+import path from 'path'
 
 import micro from 'micro'
-import handler from '../'
 import fetch from 'isomorphic-fetch'
 import listen from 'test-listen'
+import nock from 'nock'
+import fs from 'fs'
+
+import handler from '../'
 import constants from '../constants'
+
+const githubApi = nock(`https://api.github.com`)
+  .get(`/repos/${constants.REPO_PATH}/releases`)
+  .times(1)
+  .reply(200, (uri, requestBody, send) => {
+    fs.readFile(path.join(__dirname, 'fixtures', 'releases.json'), (error, data) => send(error, JSON.parse(data)))
+  })
 
 const app = micro(handler)
 
@@ -26,3 +37,7 @@ for (const download of constants.downloads) {
     t.truthy(res.url.includes(download.extension))
   })
 }
+
+test.after(t => {
+  t.truthy(githubApi.isDone())
+})

@@ -1,4 +1,20 @@
-{
-  "language": "node_js",
-  "node_js": "node"
-}
+os:
+  - linux
+sudo: false
+
+language: node_js
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+
+node_js:
+  - "node"
+
+install:
+  - export CXX=g++-4.8
+  - $CXX --version
+  - npm i

@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "ava": "0.18.2",
+    "nock": "9.0.9",
     "nodemon": "1.11.0",
     "standard": "beta",
     "test-listen": "1.0.1"
