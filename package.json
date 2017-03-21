@@ -11,10 +11,7 @@
     "deploy": "now --public && now alias"
   },
   "now": {
-    "alias": [
-      "hyper-latest",
-      "latest-hyper"
-    ]
+    "alias": "hyper-latest"
   },
   "dependencies": {
     "debug": "2.6.3",
