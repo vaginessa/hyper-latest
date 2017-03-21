@@ -1,5 +1,7 @@
 # hyper-latest
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/zeit/hyper-latest.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/zeit/hyper-latest.svg?branch=master)](https://travis-ci.org/zeit/hyper-latest)
 [![Slack Channel](https://zeit-slackin.now.sh/badge.svg)](https://zeit.chat/)
 
