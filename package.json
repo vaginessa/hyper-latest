@@ -6,7 +6,7 @@
   "scripts": {
     "start": "micro",
     "lint": "standard",
-    "test": "yarn run lint",
+    "test": "ava && standard",
     "dev": "nodemon .",
     "deploy": "now --public && now alias"
   },
@@ -23,7 +23,9 @@
     "semver": "5.3.0"
   },
   "devDependencies": {
+    "ava": "0.18.2",
     "nodemon": "1.11.0",
-    "standard": "beta"
+    "standard": "beta",
+    "test-listen": "1.0.1"
   }
 }
