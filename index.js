@@ -29,7 +29,6 @@ const isVersion = path => path !== '' && (path === 'latest' || (path.match(versi
 async function router (req, res) {
   const releases = await cache.getReleases()
   const paths = req.url.split('/')
-
   const platform = paths.find(isPlatform)
   const version = paths.find(isVersion)
   const isLatestVersion = version === 'latest'
