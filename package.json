@@ -16,7 +16,7 @@
   "dependencies": {
     "debug": "2.6.3",
     "isomorphic-fetch": "2.2.1",
-    "marky-markdown": "9.0.2",
+    "marky-markdown": "9.0.1",
     "micro": "7.1.0",
     "moment": "2.18.0",
     "ms": "1.0.0",
