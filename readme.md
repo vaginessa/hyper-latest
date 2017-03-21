@@ -1,5 +1,6 @@
 # hyper-latest
 
+[![Build Status](https://travis-ci.org/zeit/hyper-latest.svg?branch=master)](https://travis-ci.org/zeit/hyper-latest)
 [![Slack Channel](https://zeit-slackin.now.sh/badge.svg)](https://zeit.chat/)
 
 Microservice for browsing github-releases via [githubs' api](https://developer.github.com/v3/repos/releases/), with a few extras.
