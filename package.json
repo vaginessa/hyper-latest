@@ -20,7 +20,7 @@
     "lodash.flatmap": "4.5.0",
     "marky-markdown": "9.0.2",
     "micro": "7.2.1",
-    "moment": "2.18.0",
+    "moment": "2.18.1",
     "ms": "1.0.0",
     "pretty-bytes": "4.0.2",
     "semver": "5.3.0"
