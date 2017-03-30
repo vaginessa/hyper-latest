@@ -19,7 +19,7 @@
     "isomorphic-fetch": "2.2.1",
     "lodash.flatmap": "4.5.0",
     "marky-markdown": "9.0.2",
-    "micro": "7.2.2",
+    "micro": "7.3.0",
     "moment": "2.18.1",
     "ms": "1.0.0",
     "pretty-bytes": "4.0.2",
