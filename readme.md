@@ -16,4 +16,4 @@ Microservice for browsing github-releases via [githubs' api](https://developer.g
 
 ## Author
 
-Albin Ekblom ([@albinekb](https://githib.com/albinekb))
+Albin Ekblom ([@albinekb](https://github.com/albinekb))
